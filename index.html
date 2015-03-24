@@ -6,7 +6,7 @@
 
 </head>
 <body>
-  <canvas id="game-canvas" style="border: 1px solid blue"></canvas>
+  <canvas id="game-canvas" style="border: 1px solid black"></canvas>
 
   <script src="lib/keymaster.js"></script>
   <script src="lib/util.js"></script>
@@ -21,11 +21,21 @@
   <script>
     var canvas = document.getElementById("game-canvas");
     var ctx = canvas.getContext("2d");
-    var game = new Asteroids.Game(600, 800);
+
+    var game = new Asteroids.Game(700, 800);
+
     canvas.width = game.dimX;
     canvas.height = game.dimY;
-    var gameview = new Asteroids.GameView(game, ctx);
+
+    var img = new Image();
+    img.onload = function () {
+      ctx.drawImage(img, 0, 0);
+    };
+    img.src = 'lib/space.jpg'
+
+    var gameview = new Asteroids.GameView(game, ctx, img);
     gameview.start();
+
   </script>
 </body>
 </html>
