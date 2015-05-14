@@ -6,6 +6,7 @@
 
 </head>
 <body>
+  <script src="assets/jquery-1.11.3.min.js"></script>
   <canvas id="game-canvas" style="border: 1px solid black"></canvas>
 
   <script src="lib/keymaster.js"></script>
@@ -16,25 +17,79 @@
   <script src="lib/bullet.js"></script>
   <script src="lib/game.js"></script>
   <script src="lib/gameView.js"></script>
+  <style type="text/css">
 
+    .text {
+      display: inline-block;
+      font-size: 70px;
+      font-family: 'Ocr a std', 'arial';
+      color: purple;
+      text-align: center;
+    }
+
+    .button:hover {
+      color: red;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .panel {
+      z-index: 1000;
+      color: white;
+      font-size: 200%
+      border: 3px white solid;
+      display: inline-block;
+      position: absolute;
+      height: 600px;
+      width: 1200px;
+      /*margin-top: -150px;
+      margin-left: -300px;
+      top: 50%;
+      left: 50%;*/
+      text-align: center;
+      -moz-box-sizing: content-box !important;
+      box-sizing: content-box !important;
+      padding: 50px;
+      border-radius: 20px;
+      background-color: black;
+    }
+
+  </style>
+
+  <div class='text panel' id='startScreen'>
+    ASTEROIDS
+    <br>
+    <div class='text name' style='font-size: 30px; color: white;'>
+      by J.P. McDevitt
+      <br><br><br>
+      W, A, S, D to move. Space to shoot.
+    </div>
+    <br><br><br>
+    <div class='text button play'>PLAY GAME!</div>
+    <br>
 
   <script>
-    var canvas = document.getElementById("game-canvas");
-    var ctx = canvas.getContext("2d");
+    $('#game-canvas').hide();
+    $('.play').click(function() {
+      $('#startScreen').hide();
+      $('#game-canvas').show();
+      var canvas = document.getElementById("game-canvas");
+      var ctx = canvas.getContext("2d");
 
-    var game = new Asteroids.Game(1200, 600);
+      var game = new Asteroids.Game(1200, 600);
 
-    canvas.width = game.dimX;
-    canvas.height = game.dimY;
+      canvas.width = game.dimX;
+      canvas.height = game.dimY;
 
-    var img = new Image();
-    img.onload = function () {
-      ctx.drawImage(img, 0, 0);
-    };
-    img.src = 'assets/space.jpg';
+      var img = new Image();
+      img.onload = function () {
+        ctx.drawImage(img, 0, 0);
+      };
+      img.src = 'assets/space.jpg';
 
-    var gameview = new Asteroids.GameView(game, ctx, img);
-    gameview.start();
+      var gameview = new Asteroids.GameView(game, ctx, img);
+      gameview.start();
+    });
 
   </script>
 </body>
